@@ -29,18 +29,14 @@ public class PlayerController : MonoBehaviour
         MovementInput();
 
         DashInput();
-
-
     }
-
 
     private void FixedUpdate()
     {
         //Move
-        rb.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
+        rb.velocity = moveDirection *( moveSpeed * Time.fixedDeltaTime);
 
         DashPhysics();
-
     }
 
 
@@ -90,7 +86,4 @@ public class PlayerController : MonoBehaviour
             isDashingButtonDown = false;
         }
     }
-
-
-
 }

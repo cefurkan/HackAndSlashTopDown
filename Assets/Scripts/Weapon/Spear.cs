@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spear : MonoBehaviour
+public class Spear : Weapons
 {
+
     public bool isThrowed;
     private float throwSpead = 10f;
 
+    float lastAngle;
     private float angle;
 
     Vector2 lookDir;
     Vector2 mousePos;
 
     Rigidbody2D rb;
-    public Transform equippedItemPosition;
+    public Camera mainCamera;
+
 
     private void Start()
     {
@@ -22,27 +25,17 @@ public class Spear : MonoBehaviour
     }
     private void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         if (!isThrowed)
         {
             transform.position = new Vector2(equippedItemPosition.transform.position.x, equippedItemPosition.transform.position.y);
-            if(Input.GetMouseButtonDown(0))
-            {
-                LightAttack();
-            }
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                HeavyAttack();
-            }
-            if (Input.GetMouseButtonDown(1))
-            {
-                ThrowSpear();
-            }
+            AttackInputs();
         }
         else
         {
+            rb.rotation = lastAngle;
+
             if (Input.GetMouseButtonDown(1))
             {
                 ReturnSpear();
@@ -58,13 +51,30 @@ public class Spear : MonoBehaviour
         angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
 
     }
-    public void ThrowSpear()
+    public override void SpecialAttack()
     {
+        lastAngle = angle;
         rb.AddForce(lookDir.normalized * throwSpead, ForceMode2D.Impulse);
         rb.rotation = angle;
         isThrowed = true;
         transform.parent = null;
 
+
+        GameObject os = Instantiate(this.attackEffect, new Vector2(transform.position.x, transform.position.y) + lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + angle)));
+        Destroy(os, .25f);
+    }
+
+    public override void LightAttack()
+    {
+
+    }
+    public override void HeavyAttack()
+    {
+
+    }
+    public override void AttackInputs()
+    {
+        base.AttackInputs();
     }
     public void ReturnSpear()
     {
@@ -77,13 +87,6 @@ public class Spear : MonoBehaviour
         rb.rotation = 30;
         isThrowed = false;
     }
-    public void LightAttack()
-    {
-        
-    }
-    public void HeavyAttack()
-    {
 
-    }
 
 }
