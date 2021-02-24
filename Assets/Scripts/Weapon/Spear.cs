@@ -60,8 +60,8 @@ public class Spear : Weapons
         transform.parent = null;
 
 
-        GameObject os = Instantiate(this.attackEffect, new Vector2(transform.position.x, transform.position.y) + lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + angle)));
-        Destroy(os, .25f);
+        GameObject effect = Instantiate(this.attackEffect, new Vector2(transform.position.x, transform.position.y) + lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + angle)));
+        Destroy(effect, .25f);
     }
 
     public override void LightAttack()
@@ -87,6 +87,5 @@ public class Spear : Weapons
         rb.rotation = 30;
         isThrowed = false;
     }
-
 
 }
