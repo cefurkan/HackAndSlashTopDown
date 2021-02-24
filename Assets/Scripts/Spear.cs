@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ public class Spear : MonoBehaviour
 {
     public bool isThrowed;
     private float throwSpead = 10f;
-
 
     private float angle;
 
@@ -19,8 +19,6 @@ public class Spear : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-
     }
     private void Update()
     {
@@ -30,7 +28,14 @@ public class Spear : MonoBehaviour
         if (!isThrowed)
         {
             transform.position = new Vector2(equippedItemPosition.transform.position.x, equippedItemPosition.transform.position.y);
-
+            if(Input.GetMouseButtonDown(0))
+            {
+                LightAttack();
+            }
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                HeavyAttack();
+            }
             if (Input.GetMouseButtonDown(1))
             {
                 ThrowSpear();
@@ -57,7 +62,6 @@ public class Spear : MonoBehaviour
     {
         rb.AddForce(lookDir.normalized * throwSpead, ForceMode2D.Impulse);
         rb.rotation = angle;
-        rb.AddTorque(100, ForceMode2D.Impulse);
         isThrowed = true;
         transform.parent = null;
 
@@ -69,9 +73,17 @@ public class Spear : MonoBehaviour
     public void ResetSpear()
     {
         rb.velocity = Vector3.zero;
-        rb.rotation = 30;
         rb.position = Vector3.zero;
+        rb.rotation = 30;
         isThrowed = false;
+    }
+    public void LightAttack()
+    {
+        
+    }
+    public void HeavyAttack()
+    {
+
     }
 
 }
