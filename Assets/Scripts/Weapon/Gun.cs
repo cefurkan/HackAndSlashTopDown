@@ -25,8 +25,5 @@ public class Gun : Weapons, IRangedWeapons
     {
         throw new System.NotImplementedException();
     }
-    public override void AttackInputs()
-    {
-        base.AttackInputs();
-    }
+
 }

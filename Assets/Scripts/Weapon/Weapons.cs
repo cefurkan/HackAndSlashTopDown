@@ -10,19 +10,5 @@ public abstract class Weapons : MonoBehaviour
     public abstract void LightAttack();
     public abstract void HeavyAttack();
     public abstract void SpecialAttack();
-    public virtual void AttackInputs()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            LightAttack();
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            HeavyAttack();
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            SpecialAttack();
-        }
-    }
+
 }

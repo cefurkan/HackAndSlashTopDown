@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Spear : Weapons
 {
-
+    public InputManager inputManager;
     public bool isThrowed;
     private float throwSpead = 10f;
 
@@ -21,6 +21,7 @@ public class Spear : Weapons
 
     private void Start()
     {
+        inputManager = FindObjectOfType<InputManager>();
         rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
@@ -30,7 +31,7 @@ public class Spear : Weapons
         if (!isThrowed)
         {
             transform.position = new Vector2(equippedItemPosition.transform.position.x, equippedItemPosition.transform.position.y);
-            AttackInputs();
+            inputManager.AttackInputs(this);      
         }
         else
         {
@@ -59,8 +60,7 @@ public class Spear : Weapons
         isThrowed = true;
         transform.parent = null;
 
-
-        GameObject effect = Instantiate(this.attackEffect, new Vector2(transform.position.x, transform.position.y) + lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + angle)));
+        GameObject effect = Instantiate(attackEffect, new Vector2(transform.position.x, transform.position.y) + lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + angle)));
         Destroy(effect, .25f);
     }
 
@@ -72,10 +72,7 @@ public class Spear : Weapons
     {
 
     }
-    public override void AttackInputs()
-    {
-        base.AttackInputs();
-    }
+
     public void ReturnSpear()
     {
         ResetSpear();

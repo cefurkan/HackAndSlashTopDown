@@ -292,12 +292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fb68342e8025c45b16173a1666be52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isThrowed: 0
-  attackeffect: {fileID: 5358079553324352392, guid: 4d335960028b46e4e8760b3c482099a0,
+  attackEffect: {fileID: 5358079553324352392, guid: 4d335960028b46e4e8760b3c482099a0,
     type: 3}
-  effectPosition: {fileID: 216847605}
-  mainCamera: {fileID: 519420031}
   equippedItemPosition: {fileID: 30364724}
+  isThrowed: 0
+  mainCamera: {fileID: 519420031}
 --- !u!50 &174946396
 Rigidbody2D:
   serializedVersion: 4
@@ -509,6 +508,7 @@ GameObject:
   - component: {fileID: 1164780597}
   - component: {fileID: 1164780594}
   - component: {fileID: 1164780596}
+  - component: {fileID: 1164780599}
   - component: {fileID: 1164780595}
   m_Layer: 8
   m_Name: Suleyman
@@ -654,6 +654,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1164780599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164780593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336ddc65629253742bcdfc7d3802d50a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackEffect: {fileID: 0}
+  equippedItemPosition: {fileID: 0}
 --- !u!1 &1172987177
 GameObject:
   m_ObjectHideFlags: 0
