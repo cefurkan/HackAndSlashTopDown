@@ -5,38 +5,30 @@ using UnityEngine;
 
 public class Spear : Weapons
 {
-    public InputManager inputManager;
     public bool isThrowed;
     private float throwSpead = 10f;
-
     float lastAngle;
-    private float angle;
 
-    Vector2 lookDir;
-    Vector2 mousePos;
-
+    PlayerController player;
     Rigidbody2D rb;
-    public Camera mainCamera;
-
 
     private void Start()
     {
-        inputManager = FindObjectOfType<InputManager>();
+        player = GameManager.manager.player;
         rb = GetComponent<Rigidbody2D>();
     }
+
     private void Update()
     {
-        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         if (!isThrowed)
         {
             transform.position = new Vector2(equippedItemPosition.transform.position.x, equippedItemPosition.transform.position.y);
-            inputManager.AttackInputs(this);      
+            player.AttackInputs(this);      
         }
         else
         {
             rb.rotation = lastAngle;
-
             if (Input.GetMouseButtonDown(1))
             {
                 ReturnSpear();
@@ -44,29 +36,21 @@ public class Spear : Weapons
         }
 
     }
-
-    private void FixedUpdate()
-    {
-
-        lookDir = mousePos - rb.position;
-        angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-
-    }
     public override void SpecialAttack()
     {
-        lastAngle = angle;
-        rb.AddForce(lookDir.normalized * throwSpead, ForceMode2D.Impulse);
-        rb.rotation = angle;
+        lastAngle = player.angle;
+        rb.AddForce(player.lookDir.normalized * throwSpead, ForceMode2D.Impulse);
+        rb.rotation = player.angle;
         isThrowed = true;
         transform.parent = null;
 
-        GameObject effect = Instantiate(attackEffect, new Vector2(transform.position.x, transform.position.y) + lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + angle)));
+        GameObject effect = Instantiate(attackEffect, new Vector2(transform.position.x, transform.position.y) + GameManager.manager.player.lookDir.normalized * 2, Quaternion.Euler(new Vector3(0, 0, 90 + player.angle)));
         Destroy(effect, .25f);
     }
 
     public override void LightAttack()
     {
-
+       
     }
     public override void HeavyAttack()
     {
@@ -82,7 +66,7 @@ public class Spear : Weapons
         transform.SetParent(GameManager.manager.player.transform);
         rb.velocity = Vector3.zero;
         rb.position = Vector3.zero;
-        rb.rotation = 30;
+        transform.localRotation = Quaternion.Euler(0,0,30);
         isThrowed = false;
     }
 

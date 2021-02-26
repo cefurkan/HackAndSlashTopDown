@@ -14,16 +14,22 @@ public enum MainGame
     Fight,
     NarrativeScene,
 }
-
+public enum CurremtWeapon
+{
+    Bow,
+    Spear,
+    Blade,
+    Gun
+}
 public class GameManager : MonoBehaviour
 {
-   
+
     public PlayerController player;
     public static GameManager manager;
 
     public MainGame currentMainGame;
-
-   [SerializeField] private GameState _currentGameState;
+    public CurremtWeapon currentWeapon;
+    private GameState _currentGameState;
 
     public GameState CurrentGameState
     {
@@ -33,12 +39,9 @@ public class GameManager : MonoBehaviour
             switch (value)
             {
                 case GameState.Prepare:
-                
-
+                    Debug.Log("Welcome");
                     break;
                 case GameState.MainGame:
-                    Debug.Log("Welcome");
-
                     break;
                 case GameState.FinishGame:
                     break;
@@ -51,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+
         manager = this;
     }
     void Update()
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Hazırlanıyorrrr");
                 break;
             case GameState.MainGame:
-                switch(currentMainGame)
+                switch (currentMainGame)
                 {
                     case MainGame.BossFight:
                         Debug.Log("BossFayttayım");

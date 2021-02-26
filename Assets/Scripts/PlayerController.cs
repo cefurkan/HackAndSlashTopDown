@@ -14,29 +14,37 @@ public class PlayerController : MonoBehaviour
     public float dashAmount = 40f;
 
     [Header("Movement")]
+    public Vector3 moveDirection;
     [SerializeField] private float moveSpeed = 200f;
 
     [Header("Component")]
     Rigidbody2D rb;
-    InputManager inputManager;
+    public Camera mainCamera;
+
+    Vector3 mousePos;
+    public Vector2 lookDir;
+    public float angle;
+
+
+    private void Awake()
+    {
+    }
 
     void Start()
     {
-        inputManager = GetComponent<InputManager>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        inputManager.MovementInput();
-        inputManager.DashInput();
-
+        MouseInput();
+        MovementInput();
+        Dash();
     }
 
     private void FixedUpdate()
     {
-        //Move
-        rb.velocity = inputManager.moveDirection * (moveSpeed * Time.fixedDeltaTime);
+        rb.velocity = moveDirection * (moveSpeed * Time.fixedDeltaTime);
 
         DashPhysics();
     }
@@ -73,13 +81,42 @@ public class PlayerController : MonoBehaviour
         if (isDashingButtonDown)
         {
             dashCounter++;
-            Vector3 dashPosition = transform.position + (inputManager.moveDirection * dashAmount);
+            Vector3 dashPosition = transform.position + (moveDirection * dashAmount);
 
-            if (inputManager.moveDirection != Vector3.zero)
+            if (moveDirection != Vector3.zero)
             {
                 rb.velocity = dashPosition;
             }
             isDashingButtonDown = false;
+        }
+    }
+    private void MovementInput()
+    {
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.y = Input.GetAxisRaw("Vertical");
+        moveDirection = moveDirection.normalized;
+    }
+
+    private void MouseInput()
+    {
+        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        lookDir = mousePos - transform.position;
+        angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+    }
+
+    public void AttackInputs(Weapons weapons)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            weapons.LightAttack();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            weapons.HeavyAttack();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            weapons.SpecialAttack();
         }
     }
 }
