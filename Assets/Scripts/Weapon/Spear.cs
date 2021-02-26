@@ -79,6 +79,7 @@ public class Spear : Weapons
     }
     public void ResetSpear()
     {
+        transform.SetParent(GameManager.manager.player.transform);
         rb.velocity = Vector3.zero;
         rb.position = Vector3.zero;
         rb.rotation = 30;

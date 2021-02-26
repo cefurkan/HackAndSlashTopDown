@@ -4,6 +4,16 @@ using UnityEngine;
 
 public abstract class Weapons : MonoBehaviour
 {
+    //public enum CurrentWeapon
+    //{
+    //    Bow,
+    //    Blade,
+    //    Gun,
+    //    Spear
+    //}
+    //private CurrentWeapon currentWeapon;
+
+
     public GameObject attackEffect;
     public Transform equippedItemPosition;
 

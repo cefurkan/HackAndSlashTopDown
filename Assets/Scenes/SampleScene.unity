@@ -178,13 +178,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174946391}
-  m_LocalRotation: {x: 0, y: 0, z: 0.2588191, w: 0.9659258}
+  m_LocalRotation: {x: -0, y: -0, z: 0.2588191, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.6000001, z: 1}
   m_Children:
   - {fileID: 216847605}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
 --- !u!212 &174946393
 SpriteRenderer:
@@ -295,6 +295,7 @@ MonoBehaviour:
   attackEffect: {fileID: 5358079553324352392, guid: 4d335960028b46e4e8760b3c482099a0,
     type: 3}
   equippedItemPosition: {fileID: 30364724}
+  inputManager: {fileID: 0}
   isThrowed: 0
   mainCamera: {fileID: 519420031}
 --- !u!50 &174946396
@@ -305,7 +306,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174946391}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -314,10 +315,56 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!1 &210536401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 210536403}
+  - component: {fileID: 210536402}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &210536402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210536401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1efa8d4235e144b02a6854bc84f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1164780595}
+  currentMainGame: 0
+  _currentGameState: 0
+--- !u!4 &210536403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210536401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.46140838, y: 8.457287, z: -0.30219752}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &216847604
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +556,7 @@ GameObject:
   - component: {fileID: 1164780594}
   - component: {fileID: 1164780596}
   - component: {fileID: 1164780599}
+  - component: {fileID: 1164780600}
   - component: {fileID: 1164780595}
   m_Layer: 8
   m_Name: Suleyman
@@ -550,6 +598,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa99f2f9336d1c46ad83feb4deba212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDashingButtonDown: 0
+  dashCounter: 0
+  maxDashAmount: 2
+  dashCoolDown: 1
+  dashAmount: 70
   moveSpeed: 200
 --- !u!60 &1164780596
 PolygonCollider2D:
@@ -668,6 +721,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackEffect: {fileID: 0}
   equippedItemPosition: {fileID: 0}
+--- !u!114 &1164780600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164780593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5049de86532b412479294c3a9e4461ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1164780595}
+  moveDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &1172987177
 GameObject:
   m_ObjectHideFlags: 0
