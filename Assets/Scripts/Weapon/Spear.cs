@@ -20,7 +20,6 @@ public class Spear : Weapons
 
     private void Update()
     {
-
         if (!isThrowed)
         {
             transform.position = new Vector2(equippedItemPosition.transform.position.x, equippedItemPosition.transform.position.y);

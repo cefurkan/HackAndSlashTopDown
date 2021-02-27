@@ -17,19 +17,16 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDirection;
     [SerializeField] private float moveSpeed = 200f;
 
-    [Header("Component")]
-    Rigidbody2D rb;
-    public Camera mainCamera;
-
+    [Header("Mouse")]
     Vector3 mousePos;
     public Vector2 lookDir;
     public float angle;
 
+    [Header("Component")]
+    Rigidbody2D rb;
+    public Camera mainCamera;
 
-    private void Awake()
-    {
-    }
-
+ 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +37,15 @@ public class PlayerController : MonoBehaviour
         MouseInput();
         MovementInput();
         Dash();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        { }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        { }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        { }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        { }
     }
 
     private void FixedUpdate()

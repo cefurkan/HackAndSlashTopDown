@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         manager = this;
     }
     void Update()
